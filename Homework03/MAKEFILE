@@ -1,0 +1,24 @@
+CC = gcc
+CFLAGS = -std=c99 -g -Wall -Wextra
+OBJECTS = main.o build.o etree.o map.o
+
+eval:   $(OBJECTS)
+        $(CC)  -o eval $(OBJECTS)
+
+main.o: main.c
+        $(CC) $(CFLAGS) -c main.c
+
+build.o:build.c etree.h map.h
+        $(CC) $(CFLAGS) -c build.c
+
+etree.o:etree.c etree.h map.h 
+        $(CC) $(CFLAGS) -c etree.c
+
+map.o:  map.c map.h
+        $(CC) $(CFLAGS) -c map.c
+
+clean:
+        rm *.o
+	
+test: eval
+	./eval
